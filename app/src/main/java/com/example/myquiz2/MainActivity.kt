@@ -115,7 +115,7 @@ fun LoginPage(modifier: Modifier = Modifier){
                     singleLine = true,
                     label = {Text(stringResource(R.string.password))},
                     visualTransformation = PasswordVisualTransformation(),
-                    modifier = Modifier
+                    modifier Modifier
                         .padding(bottom = 5.dp, top = 12.dp)
                 )
                 val userValidation = LocalContext.current
