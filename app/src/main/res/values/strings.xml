@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">My Quiz 2</string>
+    <string name="nip">NIP : ARN123-1234</string>
+    <string name="password">Password</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_faq">Lihat FAQ</string>
+    <string name="user_validation">Mohon NIP diisi</string>
+    <string name="password_validation">Mohon Password diisi</string>
+</resources>
