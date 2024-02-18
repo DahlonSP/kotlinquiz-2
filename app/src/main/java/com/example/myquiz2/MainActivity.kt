@@ -58,12 +58,16 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun LoginPage(modifier: Modifier = Modifier){
+fun LoginPage() {
     var userInput by rememberSaveable { mutableStateOf("") }
     var passwordInput by rememberSaveable { mutableStateOf("") }
+
+    val user = userInput
+    val password = passwordInput
+
     val logo = painterResource(R.mipmap.logomahir)
 
-    Column (
+    Column(
         modifier = Modifier
             .statusBarsPadding()
             .padding(horizontal = 12.dp)
@@ -72,16 +76,16 @@ fun LoginPage(modifier: Modifier = Modifier){
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween,
 
-    ){
+        ) {
 
-        Column (
+        Column(
             modifier = Modifier
                 .statusBarsPadding()
                 .padding(horizontal = 12.dp)
                 .safeDrawingPadding(),
             horizontalAlignment = Alignment.CenterHorizontally
 
-        ){
+        ) {
             Image(
                 painter = logo,
                 contentDescription = null,
@@ -93,78 +97,94 @@ fun LoginPage(modifier: Modifier = Modifier){
             )
         }
 
-        Box(modifier = Modifier,
+        Box(
+            modifier = Modifier,
             Alignment.Center
         ) {
-            Column (
+            Column(
                 modifier = Modifier,
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 TextField(
                     value = userInput,
-                    onValueChange = {userInput = it},
+                    onValueChange = { userInput = it },
                     singleLine = true,
-                    label = {Text(stringResource(R.string.nip))},
+                    label = { Text(stringResource(R.string.nip)) },
                     modifier = Modifier
                         .padding(bottom = 5.dp, top = 12.dp)
                 )
                 TextField(
                     value = passwordInput,
-                    onValueChange = {passwordInput = it},
+                    onValueChange = { passwordInput = it },
                     singleLine = true,
-                    label = {Text(stringResource(R.string.password))},
+                    label = { Text(stringResource(R.string.password)) },
                     visualTransformation = PasswordVisualTransformation(),
-                    modifier Modifier
+                    modifier = Modifier
                         .padding(bottom = 5.dp, top = 12.dp)
                 )
+
                 val userValidation = LocalContext.current
                 val passwordValidation = LocalContext.current
                 val userPassValidation = LocalContext.current
                 val login = LocalContext.current
-                Button(onClick = {
-                    if (userInput.isEmpty() && passwordInput.isEmpty()) {
-                        Toast.makeText(userPassValidation, "NIP harus diisi dan Password harus diisi", Toast.LENGTH_SHORT).show()
-                    }else if (userInput.isEmpty()) {
-                        Toast.makeText(userValidation, "NIP harus diisi", Toast.LENGTH_SHORT).show()
-                    } else if (passwordInput.isEmpty()) {
-                        Toast.makeText(passwordValidation, "Password harus diisi", Toast.LENGTH_SHORT).show()
-                    }else {
-                        Toast.makeText(login, "Menuju Halaman Beranda…", Toast.LENGTH_SHORT).show()
-                    }
+                val csIkhwan = LocalContext.current
+                val csAkhwat = LocalContext.current
 
+                Button(onClick = {
+                    when (loginValidation(user, password)) {
+                        1 -> Toast.makeText(userPassValidation, R.string.user_pass_validation, Toast.LENGTH_SHORT).show()
+                        2 -> Toast.makeText(userValidation, R.string.user_validation, Toast.LENGTH_SHORT).show()
+                        3 -> Toast.makeText(passwordValidation, R.string.password_validation, Toast.LENGTH_SHORT).show()
+                        else -> Toast.makeText(login, R.string.login_success, Toast.LENGTH_SHORT).show()
+                    }
                 }) {
                     Text(stringResource(R.string.btn_login))
                 }
 
-                val csIkhwan = LocalContext.current
-                TextButton(onClick={
-                    Toast.makeText(csIkhwan, "Menghubungi CS Ikhwan…", Toast.LENGTH_SHORT).show()
-                },
+
+                TextButton(
+                    onClick = {
+                        Toast.makeText(csIkhwan, R.string.msg_ikhwan, Toast.LENGTH_SHORT)
+                            .show()
+                    },
                 ) {
-                    Text("Hubungi CS Ikhwan")
+                    Text(stringResource(R.string.btn_ikhwan))
                 }
-                val csAkhwat = LocalContext.current
-                TextButton(onClick={
-                    Toast.makeText(csAkhwat, "Menghubungi CS Akhwat…", Toast.LENGTH_SHORT).show()
-                },
+
+                TextButton(
+                    onClick = {
+                        Toast.makeText(csAkhwat, R.string.msg_akhwat, Toast.LENGTH_SHORT)
+                            .show()
+                    },
                 ) {
-                    Text("Hubungi CS Akhwat")
+                    Text(stringResource(R.string.btn_akhwat))
                 }
             }
         }
 
-        Column (
+        Column(
             verticalArrangement = Arrangement.Bottom
         ) {
             val faq = LocalContext.current
-            OutlinedButton(onClick = { Toast.makeText(faq, "Menuju Halaman FAQ…", Toast.LENGTH_SHORT).show() }) {
+            OutlinedButton(onClick = {
+                Toast.makeText(faq, R.string.msg_faq, Toast.LENGTH_SHORT
+                ).show()
+            }) {
                 Text(stringResource(R.string.btn_faq))
             }
         }
     }
 }
 
+private fun loginValidation(user: String, password: String): Int {
+    return when {
+        user.isEmpty() && password.isEmpty() -> 1
+        user.isEmpty() -> 2
+        password.isEmpty() -> 3
+        else -> 4
+    }
+}
 
 @Preview(showBackground = false)
 @Composable
