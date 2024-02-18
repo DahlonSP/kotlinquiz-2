@@ -1,9 +1,17 @@
 <resources>
     <string name="app_name">My Quiz 2</string>
-    <string name="nip">NIP : ARN123-1234</string>
+    <string name="nip">NIP : ARN123&#8211;1234</string>
     <string name="password">Password</string>
     <string name="btn_login">Login</string>
     <string name="btn_faq">Lihat FAQ</string>
-    <string name="user_validation">Mohon NIP diisi</string>
-    <string name="password_validation">Mohon Password diisi</string>
+    <string name="user_validation">NIP harus diisi !</string>
+    <string name="password_validation">Password harus diisi !</string>
+    <string name="user_pass_validation">NIP harus diisi dan Password harus diisi !</string>
+    <string name="login_success">Menuju Halaman Beranda..</string>
+    <string name="btn_ikhwan">Hubungi CS Ikhwan</string>
+    <string name="btn_akhwat">Hubungi CS Akhwat</string>
+    <string name="msg_ikhwan">Menghubungi CS Ikhwan&#8230;</string>
+    <string name="msg_akhwat">Menghubungi CS Akhwat&#8230;</string>
+    <string name="msg_faq">Menuju Halaman FAQ&#8230;</string>
+
 </resources>
