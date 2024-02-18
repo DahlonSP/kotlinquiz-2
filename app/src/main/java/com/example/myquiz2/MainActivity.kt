@@ -133,10 +133,26 @@ fun LoginPage() {
 
                 Button(onClick = {
                     when (loginValidation(user, password)) {
-                        1 -> Toast.makeText(userPassValidation, R.string.user_pass_validation, Toast.LENGTH_SHORT).show()
-                        2 -> Toast.makeText(userValidation, R.string.user_validation, Toast.LENGTH_SHORT).show()
-                        3 -> Toast.makeText(passwordValidation, R.string.password_validation, Toast.LENGTH_SHORT).show()
-                        else -> Toast.makeText(login, R.string.login_success, Toast.LENGTH_SHORT).show()
+                        1 -> Toast.makeText(
+                            userPassValidation,
+                            R.string.user_pass_validation,
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        2 -> Toast.makeText(
+                            userValidation,
+                            R.string.user_validation,
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        3 -> Toast.makeText(
+                            passwordValidation,
+                            R.string.password_validation,
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        else -> Toast.makeText(login, R.string.login_success, Toast.LENGTH_SHORT)
+                            .show()
                     }
                 }) {
                     Text(stringResource(R.string.btn_login))
@@ -168,7 +184,8 @@ fun LoginPage() {
         ) {
             val faq = LocalContext.current
             OutlinedButton(onClick = {
-                Toast.makeText(faq, R.string.msg_faq, Toast.LENGTH_SHORT
+                Toast.makeText(
+                    faq, R.string.msg_faq, Toast.LENGTH_SHORT
                 ).show()
             }) {
                 Text(stringResource(R.string.btn_faq))
